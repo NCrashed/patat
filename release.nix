@@ -19,7 +19,7 @@ let
     .ghc.environment*
     '';
   haskOverrides = new: old: rec {
-    voxel-viewer = new.callCabal2nix "patat" (ignore ./.) {};
+    patat = pkgs.haskell.lib.doJailbreak (new.callCabal2nix "patat" (ignore ./.) {});
   };
 in {
   inherit pkgs;

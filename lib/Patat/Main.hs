@@ -128,7 +128,7 @@ main = do
     filePath <- case oFilePath options of
         Just fp -> return fp
         Nothing -> OA.handleParseResult $ OA.Failure $
-            OA.parserFailure parserPrefs parserInfo OA.ShowHelpText mempty
+            OA.parserFailure parserPrefs parserInfo (OA.ShowHelpText Nothing) mempty
 
     errOrPres <- readPresentation filePath
     pres      <- either (errorAndExit . return) return errOrPres

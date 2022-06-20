@@ -34,7 +34,7 @@ import           System.FilePath                (splitFileName, takeExtension,
                                                  (</>))
 import qualified Text.Pandoc.Error              as Pandoc
 import qualified Text.Pandoc.Extended           as Pandoc
-
+import qualified Data.Aeson.KeyMap              as KM
 
 --------------------------------------------------------------------------------
 readPresentation :: FilePath -> IO (Either String Presentation)
@@ -121,7 +121,7 @@ readMetaSettings :: T.Text -> Either String PresentationSettings
 readMetaSettings src = case parseMetadataBlock src of
     Nothing -> Right mempty
     Just (Left err) -> Left err
-    Just (Right (A.Object obj)) | Just val <- HMS.lookup "patat" obj ->
+    Just (Right (A.Object obj)) | Just val <- KM.lookup "patat" obj ->
        resultToEither $! A.fromJSON val
     Just (Right _) -> Right mempty
   where
